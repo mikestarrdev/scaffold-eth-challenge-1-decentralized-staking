@@ -40,6 +40,8 @@ export const Staker: FC<StakerProps> = (props) => {
   const ethPrice = useDexEthPrice(mainnetProvider);
   const tx = transactor(ethComponentsSettings, ethersContext?.signer, gasPrice);
 
+  console.log(stakeContractWrite);
+
   const [threshold, setThreshold] = useState<BigNumber>();
   useEffect(() => {
     const getThreshold = async () => {
@@ -146,10 +148,10 @@ export const Staker: FC<StakerProps> = (props) => {
           type={balanceStaked ? 'primary' : 'default'}
           onClick={() => {
             if (tx) {
-              tx(stakeContractWrite.stake({ value: ethers.utils.parseEther('0.5') }));
+              tx(stakeContractWrite.stake({ value: ethers.utils.parseEther('0.1') }));
             }
           }}>
-          🥩 Stake 0.5 ether!
+          🥩 Stake 0.1 ether!
         </Button>
       </div>
 
