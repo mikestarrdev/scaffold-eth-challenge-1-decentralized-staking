@@ -11,7 +11,7 @@ contract Staker {
 
   uint256 public constant threshold = 0.1 ether;
   uint256 public deadline;
-  event StakeLog(address indexed sender, uint256 amount);
+  event Stake(address indexed sender, uint256 amount);
 
   constructor(address exampleExternalContractAddress) {
     exampleExternalContract = ExampleExternalContract(exampleExternalContractAddress);
@@ -27,7 +27,7 @@ contract Staker {
     balances[msg.sender] = amount;
     (bool success,) = msg.sender.call{value:amount}("");
     require(success, "Transfer failed");
-    emit StakeLog(msg.sender, msg.value);
+    emit Stake(msg.sender, msg.value);
   }
 
   // TODO: After some `deadline` allow anyone to call an `execute()` function
