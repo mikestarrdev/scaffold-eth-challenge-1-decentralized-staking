@@ -40,7 +40,7 @@ export const Staker: FC<StakerProps> = (props) => {
   const ethPrice = useDexEthPrice(mainnetProvider);
   const tx = transactor(ethComponentsSettings, ethersContext?.signer, gasPrice);
 
-  console.log(stakeContractWrite);
+  // console.log(stakeContractWrite);
 
   const [threshold, setThreshold] = useState<BigNumber>();
   useEffect(() => {

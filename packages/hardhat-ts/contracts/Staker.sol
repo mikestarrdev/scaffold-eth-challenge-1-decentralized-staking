@@ -10,7 +10,8 @@ contract Staker {
   mapping(address => uint256) public balances;
 
   uint256 public constant threshold = 0.1 ether;
-  uint256 public deadline;
+  uint256 public deadline = block.timestamp + 1 days;
+
   event Stake(address indexed sender, uint256 amount);
 
   constructor(address exampleExternalContractAddress) {
@@ -22,6 +23,7 @@ contract Staker {
 
   function stake() external payable {
     require(address(msg.sender).balance >= threshold, "Balance too low!");
+    require(block.timestamp < deadline, "Deadline has passed!");
     uint256 amount = 0.5 ether;
     require(balances[msg.sender] == 0, "Already staked");
     balances[msg.sender] = amount;
@@ -40,7 +42,7 @@ contract Staker {
   /**
    * @dev _time is in seconds
    */
-  function setDeadline(uint256 _time) private {
+  function setDeadline(uint256 _time) public {
       deadline = _time;
     // 1. get deadline
     // 2. if block.timestamp > deadline, send funds to exampleExternalContract
